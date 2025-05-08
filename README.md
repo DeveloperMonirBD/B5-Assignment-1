@@ -9,6 +9,7 @@ The "keyof" keyword is used to extract the keys of an object type as a union of 
 
 ### Example:
 
+```ts
 type User = {
   id: number;
   name: string;
@@ -23,6 +24,7 @@ const user: User = { id: 1, name: "Md.", email: "md@example.com" };
 
 console.log(getUserProperty(user, "name")); // Output: Md.
 console.log(getUserProperty(user, "email")); // Output: md@example.com
+```
 
 ## Why is keyof useful?
 -   Ensures type safety when accessing object properties.
@@ -34,6 +36,7 @@ Union and intersection types allow flexible type composition, making TypeScript 
 
 ### Union Types
 Union types enable a variable to hold multiple types.
+```ts
 type Status = "success" | "error" | "loading";
 
 function displayStatus(status: Status) {
@@ -42,10 +45,12 @@ function displayStatus(status: Status) {
 
 displayStatus("success"); // ✅ Valid
 displayStatus("error"); // ✅ Valid
+```
 
 ### Intersection Types
 Intersection types combine multiple types into one.
 
+```ts
 type PersonalInfo = {
   name: string;
   age: number;
@@ -66,6 +71,7 @@ const profile: UserProfile = {
 };
 
 console.log(profile);
+```
 
 ### Why are union and intersection types useful?
 -   Unions enhance flexibility when defining multiple possible values.

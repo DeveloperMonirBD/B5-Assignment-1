@@ -1,75 +1,75 @@
-# 🏆 Mastering TypeScript: `keyof` and Type Inference 🚀
+## Understanding Key TypeScript Concepts
+TypeScript is a powerful language that adds static typing to JavaScript, making code more maintainable and robust. In this blog post, we’ll explore two essential concepts:
 
-TypeScript is a powerful superset of JavaScript that enhances development with **static typing** and improved code reliability. Among its many features, **`keyof`** and **type inference** stand out as essential tools for writing cleaner, safer, and more maintainable code. 
+1. The keyof Keyword in TypeScript
+2. Using Union and Intersection Types
 
-In this blog post, we'll explore both concepts and understand how they improve TypeScript development.
+### 1. Understanding keyof in TypeScript
+The "keyof" keyword is used to extract the keys of an object type as a union of string literals. This is especially useful when working with type-safe functions that rely on object properties dynamically.
 
----
+### Example:
 
-## 🔑 Understanding `keyof` in TypeScript
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
 
-The `keyof` operator allows us to create a type that represents all the property keys of an object type. This is especially useful when accessing object properties dynamically while ensuring type safety.
-
-### 📌 Example Usage
-```typescript
-interface Product {
-    name: string;
-    price: number;
-    category: string;
+function getUserProperty<T, K extends keyof T>(user: T, key: K): T[K] {
+  return user[key];
 }
 
-function getProperty<T, K extends keyof T>(obj: T, key: K): T[K] {
-    return obj[key];
+const user: User = { id: 1, name: "Md.", email: "md@example.com" };
+
+console.log(getUserProperty(user, "name")); // Output: Md.
+console.log(getUserProperty(user, "email")); // Output: md@example.com
+
+## Why is keyof useful?
+-   Ensures type safety when accessing object properties.
+-   Reduces errors caused by incorrect property names.
+-   Helps build reusable, dynamic utility functions.
+
+## 2. Using Union and Intersection Types
+Union and intersection types allow flexible type composition, making TypeScript more expressive.
+
+### Union Types
+Union types enable a variable to hold multiple types.
+type Status = "success" | "error" | "loading";
+
+function displayStatus(status: Status) {
+  console.log(`Current status: ${status}`);
 }
 
-const myProduct: Product = { name: "Laptop", price: 1500, category: "Electronics" };
+displayStatus("success"); // ✅ Valid
+displayStatus("error"); // ✅ Valid
 
-console.log(getProperty(myProduct, "name"));  // Output: "Laptop"
-console.log(getProperty(myProduct, "price")); // Output: 1500
-Why is keyof Useful?
-Prevents errors by ensuring only valid keys can be accessed.
+### Intersection Types
+Intersection types combine multiple types into one.
 
-Helps create flexible functions that work across different object types.
+type PersonalInfo = {
+  name: string;
+  age: number;
+};
 
-Supports dynamic property access while maintaining type safety.
+type ContactInfo = {
+  email: string;
+  phone: string;
+};
 
-🎯 Type Inference in TypeScript
-TypeScript’s type inference mechanism automatically determines the type of a variable based on its value. This eliminates the need for explicit type annotations while maintaining type safety.
+type UserProfile = PersonalInfo & ContactInfo;
 
-📌 Example Usage
-typescript
-const message = "Hello, TypeScript!";  // Inferred as string
-const count = 42;                      // Inferred as number
+const profile: UserProfile = {
+  name: "Md.",
+  age: 25,
+  email: "md@example.com",
+  phone: "123-456-7890",
+};
 
-function multiply(x: number, y: number) {
-    return x * y;  // TypeScript infers the return type as number
-}
+console.log(profile);
 
-const result = multiply(6, 7);  // Inferred as number
-console.log(result);  // Output: 42
-✅ Why is Type Inference Helpful?
-Reduces boilerplate: No need to manually define types for every variable.
+### Why are union and intersection types useful?
+-   Unions enhance flexibility when defining multiple possible values.
+-   Intersections allow creating more structured and reusable object types.
 
-Improves readability: Code becomes cleaner and easier to understand.
-
-Enhances maintainability: Developers can rely on TypeScript’s intelligence while still enjoying type safety.
-
-🚀 Final Thoughts
-Both keyof and type inference are powerful tools in TypeScript, enabling developers to write more efficient and error-free code:
-
-keyof ensures type-safe property access.
-
-Type inference eliminates unnecessary type annotations, making code more intuitive.
-
-📌 Next Steps
-To implement this blog post in your GitHub repository:
-
-Save this content in your README.md file.
-
-Create a single TypeScript file that includes both the keyof example and the type inference example.
-
-Use meaningful variable and function names.
-
-Avoid unnecessary comments like "Problem 1" or "Problem 2."
-
-Ensure the code is original.
+## What to Submit
+-   Public Github Repo Link : https://github.com/DeveloperMonirBD/B5-Assignment-1
